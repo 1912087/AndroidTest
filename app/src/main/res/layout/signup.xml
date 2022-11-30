@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_signup2"
+    android:gravity="center">
+
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="270dp"
+        android:layout_height="55dp"
+        android:background="@drawable/email"
+        android:hint="test@naver.com"
+        android:paddingTop="20dp"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="150dp"
+        android:textSize="15dp"/>
+
+    <TextView
+        android:id="@+id/emailCheck"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:text="이미 존재하는 계정입니다."
+        android:textColor="#ff0000"
+        android:paddingTop="5dp"
+        android:visibility="gone"
+        android:layout_marginBottom="20dp"/>
+
+    <EditText
+        android:id="@+id/editPass"
+        android:layout_width="270dp"
+        android:layout_height="55dp"
+        android:background="@drawable/password"
+        android:hint="*********"
+        android:paddingTop="20dp"
+        android:paddingLeft="10dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="15dp"
+        android:inputType="textPassword"/>
+
+    <EditText
+        android:id="@+id/editConPass"
+        android:layout_width="270dp"
+        android:layout_height="55dp"
+        android:background="@drawable/confirm_password"
+        android:hint="*********"
+        android:paddingTop="20dp"
+        android:paddingLeft="10dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="15dp"
+        android:inputType="textPassword"/>
+
+    <TextView
+        android:id="@+id/conCheck"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:text="비밀번호가 일치하지 않습니다"
+        android:textColor="#ff0000"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:gravity="center">
+
+        <CheckBox
+            android:id="@+id/chkAgree"
+            android:layout_width="25dp"
+            android:layout_height="15dp"
+            android:layout_marginRight="-5dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="13dp"
+            android:paddingTop="0dp"
+            android:src="@drawable/agree_msg" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btnSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/signup_button"
+        android:gravity="center"
+        android:paddingLeft="15dp"/>
+
+</LinearLayout>
