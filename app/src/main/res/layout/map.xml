@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:padding="0dp"
+        android:orientation="horizontal"
+        android:background="@drawable/menu_bar"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:src="@drawable/title_map"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:padding="0dp"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        >
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_search_map"
+            android:layout_weight="1"
+            android:paddingLeft="20dp"
+            android:textSize="15dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:src="@drawable/map_search_icon"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@drawable/bg_mylocation"
+        android:orientation="vertical"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:orientation="horizontal"
+            android:padding="0dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:gravity="left"
+            android:src="@drawable/img_mylocation" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Capital of Thailand"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="top"
+                    android:src="@drawable/icon_myloaction" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="6dp"
+                    android:text="Bangkok"
+                    android:textSize="13dp" />
+            </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="Bangkok, Thailand's capital, is a large city known for omate shrines and vibrant street life."
+            android:textSize="13dp"
+            android:textColor="#ccc"
+            android:lineSpacingExtra="3dp"/>
+
+    </LinearLayout>
+
+    <!-- map -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="#00FF00"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        >
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:map="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/gmap"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            map:cameraTargetLat="37.541"
+            map:cameraTargetLng="126.986"
+            map:cameraZoom="15" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:padding="0dp"
+        android:orientation="horizontal"
+        android:background="@drawable/hp_bottom_bar"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/ivOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:src="@drawable/options_off"
+            android:layout_margin="20dp"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:src="@drawable/bell"
+            android:layout_margin="20dp"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:src="@drawable/message"
+            android:layout_margin="20dp"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:src="@drawable/location_on"
+            android:layout_margin="20dp"
+            />
+        <ImageView
+            android:id="@+id/ivPerson"
+            android:layout_width="wrap_content"
+            android:layout_height="18dp"
+            android:src="@drawable/person"
+            android:layout_margin="20dp"
+            />
+    </LinearLayout>
+
+
+
+</LinearLayout>

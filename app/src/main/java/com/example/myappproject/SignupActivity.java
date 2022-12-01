@@ -19,7 +19,7 @@ public class SignupActivity extends Activity {
 
     EditText editEmail, editPass, editConPass;
     CheckBox chkAgree;
-    ImageView btnSignUp;
+    ImageView btnSignUp, btnHome;
     TextView conCheck, emailCheck;
 
     //DB
@@ -38,18 +38,18 @@ public class SignupActivity extends Activity {
         btnSignUp = (ImageView) findViewById(R.id.btnSignUp);
         conCheck = (TextView) findViewById(R.id.conCheck);
         emailCheck = (TextView) findViewById(R.id.emailCheck);
+        btnHome = (ImageView) findViewById(R.id.btnHome);
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                conCheck.setVisibility(View.GONE);
                 if(valiCheck()){
                     MemberDto memberDto = new MemberDto();
                     memberDto.setEmail(editEmail.getText().toString());
                     memberDto.setPass(editPass.getText().toString());
-                    int result = LoginActivity.memberDao.emailCheck(memberDto);
+                    int result = MainActivity.memberDao.emailCheck(memberDto);
                     if(result == 0){
-                        LoginActivity.memberDao.signUp(memberDto);
+                        MainActivity.memberDao.signUp(memberDto);
                         AlertDialog.Builder dlg = new AlertDialog.Builder(SignupActivity.this);
                         dlg.setMessage("회원가입 성공");
                         dlg.setPositiveButton("확인", new DialogInterface.OnClickListener(){
@@ -66,7 +66,15 @@ public class SignupActivity extends Activity {
             }
         });
 
-    }
+        //home(로그인) 이벤트 처리
+        btnHome.setOnClickListener(new View.OnClickListener(){
+           @Override
+           public void onClick(View v){
+               finish();
+           }
+        });
+
+    }//onCreate()
 
     //Validation Check
     public boolean valiCheck(){
@@ -82,14 +90,22 @@ public class SignupActivity extends Activity {
             Toast.makeText(getApplicationContext(), "비밀번호 확인을 해주세요", Toast.LENGTH_SHORT).show();
             editConPass.requestFocus();
             return false;
-        }else if(!editPass.getText().toString().equals(editConPass.getText().toString())){
-            conCheck.setVisibility(View.VISIBLE);
-            return false;
         }else if(!chkAgree.isChecked()){
             Toast.makeText(getApplicationContext(), "약관에 동의해주세요", Toast.LENGTH_SHORT).show();
             return false;
         }else{
-            return true;
+            //패스워드 확인
+            //값이 있는지 없는지 전부 체크한 후 비교할 것
+            if(!editPass.getText().toString().equals(editConPass.getText().toString())) {
+                conCheck.setVisibility(View.VISIBLE);
+                editPass.setText("");
+                editConPass.setText("");
+                editPass.requestFocus();
+                return false;
+            }else{
+                conCheck.setVisibility(View.GONE);
+                return true;
+            }
         }
     }
 }

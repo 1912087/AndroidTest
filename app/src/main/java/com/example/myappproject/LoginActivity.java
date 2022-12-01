@@ -19,13 +19,7 @@ public class LoginActivity extends Activity {
 
     ImageView btnSignUp;
     EditText editEmail, editPass;
-    ImageView btnLogin;
-
-    //DB
-    SQLiteDatabase db;
-    String tableName = "member";
-
-    static MemberDao memberDao;
+    ImageView ivLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +28,11 @@ public class LoginActivity extends Activity {
 
         editEmail = (EditText) findViewById(R.id.editEmail);
         editPass = (EditText) findViewById(R.id.editPass);
-        btnLogin = (ImageView) findViewById(R.id.btnLogin);
-
-        //DB 연동
-        db = openOrCreateDatabase("mydb", MODE_PRIVATE, null);
-        memberDao = new MemberDao(db, tableName);
-        memberDao.createTable();
+        ivLogin = (ImageView) findViewById(R.id.ivLogin);
 
         btnSignUp = (ImageView) findViewById(R.id.btnSignUp);
+        
+        //회원가입 페이지 이동
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,7 +41,8 @@ public class LoginActivity extends Activity {
             }
         });
 
-        btnLogin.setOnClickListener(new View.OnClickListener(){
+        //로그인
+        ivLogin.setOnClickListener(new View.OnClickListener(){
            @Override
            public void onClick(View view){
                if(valiCheck()){
@@ -58,14 +50,16 @@ public class LoginActivity extends Activity {
                    MemberDto memberDto = new MemberDto();
                    memberDto.setEmail(editEmail.getText().toString());
                    memberDto.setPass(editPass.getText().toString());
-                   int result = memberDao.login(memberDto);
+                   int result = MainActivity.memberDao.login(memberDto);
 
                    if(result == 1){
                        dlg.setMessage("로그인 성공");
                        dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
                            @Override
                            public void onClick(DialogInterface dialog, int which) {
-                               Toast.makeText(getApplicationContext(), "로그인!", Toast.LENGTH_SHORT).show();
+                               Intent intent = new Intent(getApplicationContext(), HotplaceActivity.class);
+                               startActivity(intent);
+                               finish();
                            }
                        });
                    }else{
@@ -80,15 +74,15 @@ public class LoginActivity extends Activity {
                    dlg.show();
                }
            }
-        });
+        });//ivLogin Click Event
 
-    }
+    }//onCreate method
 
     //Validation Check
     public boolean valiCheck(){
         AlertDialog.Builder dlg = new AlertDialog.Builder(LoginActivity.this);
         if(editEmail.getText().length() == 0){
-            Toast.makeText(getApplicationContext(), "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "이메일을 입력해주세요", Toast.LENGTH_SHORT).show();
             editEmail.requestFocus();
             return false;
         }else if(editPass.getText().length() == 0){
@@ -98,5 +92,5 @@ public class LoginActivity extends Activity {
         }else{
             return true;
         }
-    }
-}
+    }//valiCheck method
+}//MainActivity
