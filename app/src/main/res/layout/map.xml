@@ -29,16 +29,19 @@
         android:layout_margin="10dp"
         >
         <EditText
+            android:id="@+id/search_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_search_map"
             android:layout_weight="1"
             android:paddingLeft="20dp"
             android:textSize="15dp"
+            android:hint="장소를 입력하세요"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"/>
 
         <ImageView
+            android:id="@+id/btnSearch"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:src="@drawable/map_search_icon"
@@ -61,6 +64,7 @@
             android:orientation="horizontal"
             android:padding="0dp">
         <ImageView
+            android:id="@+id/ivImg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -76,6 +80,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -97,6 +102,7 @@
                     android:src="@drawable/icon_myloaction" />
 
                 <TextView
+                    android:id="@+id/tvCountry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -108,13 +114,14 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/tvContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:text="Bangkok, Thailand's capital, is a large city known for omate shrines and vibrant street life."
             android:textSize="13dp"
-            android:textColor="#ccc"
+            android:textColor="#959595"
             android:lineSpacingExtra="3dp"/>
 
     </LinearLayout>

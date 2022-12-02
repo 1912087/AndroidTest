@@ -2,7 +2,9 @@ package com.example.myappproject;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,19 +14,24 @@ import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 public class HotplaceActivity extends Activity {
 
     Gallery gallery;
-    Integer[] hpId = {R.drawable.hp_01, R.drawable.hp_02, R.drawable.hp_03, R.drawable.hp_04,
-            R.drawable.hp_05,R.drawable.hp_06};
-    ImageView ivMap;
+    Integer[] hpId = MainActivity.hotplaceDao.select();
+    ImageView ivMap, ivPerson, ivBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.hotplace);
+
         gallery = (Gallery) findViewById(R.id.hp_gallery);
         ivMap = (ImageView) findViewById(R.id.ivMap);
+        ivPerson = (ImageView) findViewById(R.id.ivPerson);
+        ivBack = (ImageView) findViewById(R.id.ivBack);
 
         MyGalleryAdapter adapter = new MyGalleryAdapter(this);
         gallery.setAdapter(adapter);
@@ -44,6 +51,42 @@ public class HotplaceActivity extends Activity {
             public void onClick(View v) {
                 Intent mapIntent = new Intent(getApplicationContext(), MapActivity.class);
                 startActivity(mapIntent);
+            }
+        });
+
+        ivPerson.setOnClickListener(new View.OnClickListener(){
+           @Override
+           public void onClick(View v){
+               //System 종료
+               //finish() -- 현재 액티비티만 종료
+               AlertDialog.Builder dlg = new AlertDialog.Builder(HotplaceActivity.this);
+               dlg.setTitle("confirm exit");
+               dlg.setIcon(R.drawable.exit);
+               dlg.setMessage("종료하시겠습니까?");
+               dlg.setPositiveButton("exit", new DialogInterface.OnClickListener(){
+                  @Override
+                  public void onClick(DialogInterface dialog, int witch){
+                      finishAffinity();
+                      System.runFinalization(); //현재 실행 중인 모든 앱을 종료
+                      System.exit(0);
+                  }
+               });
+               dlg.setNegativeButton("logout", new DialogInterface.OnClickListener() {
+                   @Override
+                   public void onClick(DialogInterface dialog, int which) {
+                       Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                       startActivity(intent);
+                       finish();
+                   }
+               });
+               dlg.show();
+           }
+        });
+
+        ivBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -73,7 +116,7 @@ public class HotplaceActivity extends Activity {
 
         public View getView(int position, View counterView, ViewGroup parent){
             ImageView imgView = new ImageView(context);
-            imgView.setLayoutParams(new Gallery.LayoutParams(100, 150));
+            imgView.setLayoutParams(new Gallery.LayoutParams(150, 150));
             imgView.setScaleType(ImageView.ScaleType.FIT_CENTER);
             imgView.setImageResource(hpId[position]);
 

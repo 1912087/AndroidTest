@@ -19,7 +19,7 @@ public class LoginActivity extends Activity {
 
     ImageView btnSignUp;
     EditText editEmail, editPass;
-    ImageView ivLogin;
+    ImageView ivLogin, logExit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class LoginActivity extends Activity {
         editEmail = (EditText) findViewById(R.id.editEmail);
         editPass = (EditText) findViewById(R.id.editPass);
         ivLogin = (ImageView) findViewById(R.id.ivLogin);
+        logExit = (ImageView) findViewById(R.id.logExit);
 
         btnSignUp = (ImageView) findViewById(R.id.btnSignUp);
         
@@ -63,18 +64,22 @@ public class LoginActivity extends Activity {
                            }
                        });
                    }else{
-                       dlg.setMessage("로그인 실패");
-                       dlg.setNegativeButton("확인", new DialogInterface.OnClickListener() {
-                           @Override
-                           public void onClick(DialogInterface dialog, int which) {
-                               Toast.makeText(getApplicationContext(), "로그인...실패...", Toast.LENGTH_SHORT).show();
-                           }
-                       });
+                       dlg.setMessage("아이디 또는 비밀번호가 일치하지 않습니다.");
+                       dlg.setNegativeButton("닫기", null);
                    }
                    dlg.show();
                }
            }
         });//ivLogin Click Event
+
+        logExit.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                finishAffinity();
+                System.runFinalization();
+                System.exit(0);
+            }
+        });
 
     }//onCreate method
 

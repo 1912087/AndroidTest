@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,7 +30,12 @@ public class MapActivity extends Activity implements OnMapReadyCallback {
     GoogleMap gMap;
     MapFragment mapFrag;
     GroundOverlayOptions videoMark;
-    ImageView ivOptions, ivPerson;
+    ImageView ivOptions, ivPerson, ivImg;
+    TextView tvLocation, tvCountry, tvContent;
+    EditText search_location;
+    ImageView btnSearch;
+    String lat = "13.7672467799382";
+    String lng = "100.4930243959339";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,14 @@ public class MapActivity extends Activity implements OnMapReadyCallback {
 
         ivOptions = (ImageView) findViewById(R.id.ivOptions);
         ivPerson = (ImageView) findViewById(R.id.ivPerson);
+        ivImg = (ImageView) findViewById(R.id.ivImg);
+
+        tvLocation = (TextView) findViewById(R.id.tvLocation);
+        tvCountry = (TextView) findViewById(R.id.tvCountry);
+        tvContent = (TextView) findViewById(R.id.tvContent);
+
+        search_location = (EditText) findViewById(R.id.search_location);
+        btnSearch = (ImageView) findViewById(R.id.btnSearch);
 
         ivOptions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,29 +71,60 @@ public class MapActivity extends Activity implements OnMapReadyCallback {
                 dlg.setTitle("confirm exit");
                 dlg.setIcon(R.drawable.exit);
                 dlg.setMessage("Are you sure you want to exit?");
-
-                dlg.setPositiveButton("exit", new DialogInterface.OnClickListener() {
+                dlg.setPositiveButton("exit", new DialogInterface.OnClickListener(){
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                    public void onClick(DialogInterface dialog, int witch){
                         finishAffinity();
-                        System.runFinalization();
+                        System.runFinalization(); //현재 실행 중인 모든 앱을 종료56
                         System.exit(0);
                     }
                 });
-
+                dlg.setNegativeButton("logout", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
                 dlg.show();
             }
         });
 
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(search_location.getText().length() == 0){
+                    Toast.makeText(MapActivity.this, "검색어를 입력해주세요", Toast.LENGTH_SHORT).show();
+                    search_location.requestFocus();
+                }else if(search_location.getText().length() < 5){
+                    Toast.makeText(MapActivity.this, "5글자 이상 입력해주세요", Toast.LENGTH_SHORT).show();
+                    search_location.requestFocus();
+                }else{
+                   /* String searchText = search_location.getText().toString().trim();
+                    MapDto mapDto = MainActivity.mapDao.search(searchText);
+                    if(mapDto.getCount() != 0){
+                        tvLocation.setText(mapDto.getLocation());
+                        tvCountry.setText(mapDto.getCountry());
+                        tvContent.setText(mapDto.getContent());
+                        ivImg.setImageResource(mapDto.getImg());
+                        lat = mapDto.getLat();
+                        lng = mapDto.getLng();
 
-
+                        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)), 15));
+                    }else{
+                        Toast.makeText(getApplicationContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
+                    }*/
+                }
+            }
+        });
     }
 
     @Override
     public void onMapReady(GoogleMap map) {
         gMap = map;
         gMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(13.7672467799382, 100.4930243959339), 15));
+        gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)), 15));
     }
 
 }
