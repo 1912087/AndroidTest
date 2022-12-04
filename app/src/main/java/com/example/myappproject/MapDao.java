@@ -7,8 +7,8 @@ public class MapDao {
 
     SQLiteDatabase db;
     String tableName;
-    Integer[] pidList = {R.drawable.hp_01, R.drawable.hp_02, R.drawable.hp_03, R.drawable.hp_04,
-            R.drawable.hp_05,R.drawable.hp_06};
+    Integer[] pidList = {R.drawable.icon01, R.drawable.icon02, R.drawable.icon03, R.drawable.icon04,
+            R.drawable.icon05, R.drawable.icon06};
 
 
     String[] latList = {"25.310778683847857"};
@@ -17,6 +17,10 @@ public class MapDao {
     public MapDao(SQLiteDatabase db, String tableName){
         this.db = db;
         this.tableName = tableName;
+
+        if(imgCount() == 0){
+            update_img();
+        }
     }
 
     public void createTable(){
@@ -37,6 +41,16 @@ public class MapDao {
         db.execSQL(sql);
     }
 
+    public int imgCount(){
+        int result = 0;
+        String sql = "SELECT COUNT(IMG) FROM " + tableName + ";";
+        Cursor cursor = db.rawQuery(sql, null);
+        while(cursor.moveToNext()){
+            result = cursor.getInt(0);
+        }
+        return result;
+    }
+
     public void update_img(){
         for(int i=0; i<pidList.length; i++){
             String sql = "UPDATE map SET IMG = '" + pidList[i] + "' WHERE MID = " + (i+1);
@@ -47,7 +61,7 @@ public class MapDao {
     public MapDto search(String search){
         MapDto mapDto = new MapDto();
         String sql = "SELECT MID, LOCATION, COUNTRY, CONTENT, IMG, LAT, LNG " +
-                " FROM map WHERE (LOCATION LIKE '%" + search + "%' OR COUNTRY LIKE '%" + search + "%');";
+                " FROM " + tableName + " WHERE LOCATION LIKE '%" + search + "%';";
         Cursor cursor = db.rawQuery(sql, null);
         while(cursor.moveToNext()){
             mapDto.setMid(cursor.getInt(0));
