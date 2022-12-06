@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/dev/Android/android-project/MyAppProject/app/src/main/res/drawable/box_style.xml" value="0.1955" />
+        <entry key="..\:/dev/Android/android-project/MyAppProject/app/src/main/res/drawable/ic__location.xml" value="0.1955" />
         <entry key="..\:/dev/Android/android-project/MyAppProject/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.287" />
+        <entry key="..\:/dev/Android/android-project/MyAppProject/app/src/main/res/drawable/imageborder.xml" value="0.2785" />
         <entry key="..\:/dev/Android/android-project/MyAppProject/app/src/main/res/layout/activity_main.xml" value="0.3446557971014493" />
+        <entry key="..\:/dev/Android/android-project/MyAppProject/app/src/main/res/layout/hotplace.xml" value="0.35190217391304346" />
         <entry key="..\:/dev/Android/android-project/MyAppProject/app/src/main/res/layout/login.xml" value="0.3446557971014493" />
         <entry key="..\:/dev/Android/android-project/MyAppProject/app/src/main/res/layout/map.xml" value="0.3333333333333333" />
         <entry key="..\:/dev/Android/android-project/MyAppProject/app/src/main/res/layout/signup.xml" value="0.3446557971014493" />

@@ -1,4 +1,4 @@
-package com.example.myappproject;
+package com.example.myappproject.dto;
 
 public class MemberDto {
     private String email;

@@ -3,13 +3,23 @@ package com.example.myappproject;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Map;
+import com.example.myappproject.dao.HotplaceDao;
+import com.example.myappproject.dao.MapDao;
+import com.example.myappproject.dao.MemberDao;
+import com.example.myappproject.dto.HotplaceDto;
+import com.example.myappproject.dto.MapDto;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     //DB
@@ -19,11 +29,16 @@ public class MainActivity extends AppCompatActivity {
     static MapDao mapDao;
     String hotTableName = "hotplace";
     String mapTableName = "map";
+    static public ArrayList<MapDto> mapList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Json Parsing
+        mapList = jsonParsing(getJson());
+        //Log.d("result", " ---> " + mapList.get(0).getLocation());
 
         //DB 연동
         db = openOrCreateDatabase("gotour", MODE_PRIVATE, null);
@@ -43,7 +58,50 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(loginIntent);
             }
         });
+    }//onCreate
 
-        
+    public String getJson(){
+        String json = "";
+
+        try {
+            InputStream is = getAssets().open("Map.json");
+            int fileSize = is.available();
+
+            byte[] buffer = new byte[fileSize];
+            is.read(buffer);
+            is.close();
+
+            json = new String(buffer , "UTF-8");
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return json;
+    }
+
+    public ArrayList<MapDto> jsonParsing(String json){
+        ArrayList<MapDto> list = new ArrayList<>();
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            JSONArray jarray = jsonObject.getJSONArray("maps");
+
+            for(int i=0; i<jarray.length(); i++){
+                JSONObject jobject = jarray.getJSONObject(i);
+
+                MapDto dto = new MapDto();
+                dto.setLocation(jobject.getString("location"));
+                dto.setTourist(jobject.getString("tourist"));
+                dto.setCountry(jobject.getString("country"));
+                dto.setContent(jobject.getString("content"));
+                dto.setLat(jobject.getString("lat"));
+                dto.setLng(jobject.getString("lng"));
+
+                list.add(dto);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return list;
     }
 }

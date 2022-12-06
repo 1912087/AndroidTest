@@ -1,0 +1,52 @@
+{"maps" : [
+    {
+        "location" : "Education City Stadium",
+        "tourist" : "Lusail",
+        "country" :	"Qatar",
+        "content" :	"월드컵이 열리는 축구 경기장입니다.",
+        "lat" : "25.31095326",
+        "lng" : "51.42438998"
+    },
+    {
+        "location" : "Hanoi Opera House",
+        "tourist" : "Da Nang",
+        "country" :	"Vietnam",
+        "content" :	"1911년에 문을 연 화려한 공연장에서 클래식 음악, 무용, 오페라 공연이 열립니다.",
+        "lat" : "21.02513935",
+        "lng" : "105.8571328"
+    },
+    {
+        "location" : "Big Ben",
+        "tourist" : "London",
+        "country" : "UK",
+        "content" : "국가적 상징인 16층 크기의 고딕 양식 시계탑으로 영국 국회의사당의 동쪽 끝에 위치합니다.",
+        "lat" : "51.50249288",
+        "lng" : "-0.12701045"
+    },
+    {
+        "location" : "de Young Museum",
+        "tourist" : "California San Francisco",
+        "country" : "USA",
+        "content" : "골든 게이트 공원에 위치한 구리로 된 외관이 인상적인 건물에 다양한 미술 작품 컬렉션이 소장되어 있습니다.",
+        "lat" : "37.77236733",
+        "lng" : "-122.4689896"
+    },
+    {
+        "location" : "Sydney Opera House",
+        "tourist" : "Sydney",
+        "country" : "Australia",
+        "content" : "스카이라인에 우뚝 솟은 예술 센터로 가이드 투어를 이용하거나 오페라, 연극, 음악, 무용 공연을 볼 수 있습니다.",
+        "lat" : "-33.8556875",
+        "lng" : "151.2153961"
+    },
+    {
+        "location" : "Cristo Redentor",
+        "tourist" : "Rio de Janeiro",
+        "country" : "Brazil",
+        "content" : "산 꼭대기에 있는 98피트 높이의 예수 그리스도 상으로 기차를 이용해 갈 수 있으며 도시 경관도 즐길 수 있습니다.",
+        "lat" : "-22.95249069",
+        "lng" : "-43.21024758"
+    }
+
+]
+}

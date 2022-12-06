@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +13,29 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myappproject.dto.HotplaceDto;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+
 public class HotplaceActivity extends Activity {
 
     Gallery gallery;
-    Integer[] hpId = MainActivity.hotplaceDao.select();
-    ImageView ivMap, ivPerson, ivBack;
+    //Integer[] hpId = MainActivity.hotplaceDao.select();
+    ArrayList<HotplaceDto> list = MainActivity.hotplaceDao.select();
+    ImageView ivMap, ivPerson, ivBack, ivPoster;
+    TextView tvName, tvLocation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +46,14 @@ public class HotplaceActivity extends Activity {
         ivMap = (ImageView) findViewById(R.id.ivMap);
         ivPerson = (ImageView) findViewById(R.id.ivPerson);
         ivBack = (ImageView) findViewById(R.id.ivBack);
+        ivPoster = (ImageView) findViewById(R.id.ivPoster);
+        tvName = (TextView) findViewById(R.id.tvName);
+        tvLocation = (TextView) findViewById(R.id.tvLocation);
+
+        ivPoster.setClipToOutline(true);
+
+        tvName.setText(list.get(0).getPname());
+        tvLocation.setText(list.get(0).getPlocation() + ", " + list.get(0).getPcountry());
 
         MyGalleryAdapter adapter = new MyGalleryAdapter(this);
         gallery.setAdapter(adapter);
@@ -40,7 +62,10 @@ public class HotplaceActivity extends Activity {
         gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "ddd", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "ddd", Toast.LENGTH_SHORT).show();
+                ivPoster.setImageResource(list.get(position).getPid());
+                tvName.setText(list.get(position).getPname());
+                tvLocation.setText(list.get(position).getPlocation() + ", " + list.get(position).getPcountry());
 //                ivPoster.setImageResource(posterId[position]);
 //                ivPoster.setScaleType(ImageView.ScaleType.FIT_CENTER);
             }
@@ -103,7 +128,7 @@ public class HotplaceActivity extends Activity {
 
         //Adapter 기능을 구현하기 위한 4가지 메소드 정의 --> API를 참조하여 Adapter 클래스의 메소드
         public int getCount(){
-            return hpId.length;
+            return list.size();
         }
 
         public Object getItem(int position){
@@ -117,11 +142,12 @@ public class HotplaceActivity extends Activity {
         public View getView(int position, View counterView, ViewGroup parent){
             ImageView imgView = new ImageView(context);
             imgView.setLayoutParams(new Gallery.LayoutParams(150, 150));
-            imgView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            imgView.setImageResource(hpId[position]);
+            imgView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imgView.setBackground(getResources().getDrawable(R.drawable.imageborder));
+            imgView.setClipToOutline(true);
+            imgView.setImageResource(list.get(position).getPid());
 
             return imgView;
         }
-
     }//MyGalleryAdapter
 }

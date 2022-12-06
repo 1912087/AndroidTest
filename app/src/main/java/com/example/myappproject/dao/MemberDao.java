@@ -1,8 +1,9 @@
-package com.example.myappproject;
+package com.example.myappproject.dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+
+import com.example.myappproject.dto.MemberDto;
 
 public class MemberDao {
 

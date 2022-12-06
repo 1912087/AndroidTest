@@ -1,8 +1,9 @@
-package com.example.myappproject;
+package com.example.myappproject.dto;
 
 public class MapDto {
     private int mid;
     private String location;
+    private String tourist;
     private String country;
     private String content;
     private int img;
@@ -24,6 +25,14 @@ public class MapDto {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getTourist() {
+        return tourist;
+    }
+
+    public void setTourist(String tourist) {
+        this.tourist = tourist;
     }
 
     public String getCountry() {

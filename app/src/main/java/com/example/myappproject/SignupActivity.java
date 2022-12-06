@@ -2,7 +2,6 @@ package com.example.myappproject;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -13,7 +12,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
-import org.w3c.dom.Text;
+import com.example.myappproject.dto.MemberDto;
 
 public class SignupActivity extends Activity {
 
